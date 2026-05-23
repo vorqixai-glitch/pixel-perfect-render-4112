@@ -1,26 +1,47 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Nav } from "@/components/veritas/Nav";
+import { Hero } from "@/components/veritas/Hero";
+import { ProofReplay } from "@/components/veritas/ProofReplay";
+import { Sovereignty } from "@/components/veritas/Sovereignty";
+import { Telemetry } from "@/components/veritas/Telemetry";
+import { Deployment } from "@/components/veritas/Deployment";
+import { CTA } from "@/components/veritas/CTA";
+import { Footer } from "@/components/veritas/Footer";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Veritas Core — Forensic Authenticity Infrastructure" },
+      {
+        name: "description",
+        content:
+          "Sovereign-grade cryptographic chain-of-truth for governments, banks, and regulated enterprises. The only verification platform institutions can audit independently.",
+      },
+      { property: "og:title", content: "Veritas Core — Forensic Authenticity Infrastructure" },
+      {
+        property: "og:description",
+        content:
+          "Truth, proven cryptographically. Immutable proof, forensic replay, independent verification.",
+      },
+      { property: "og:type", content: "website" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen">
+      <Nav />
+      <main>
+        <Hero />
+        <ProofReplay />
+        <Sovereignty />
+        <Telemetry />
+        <Deployment />
+        <CTA />
+      </main>
+      <Footer />
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
