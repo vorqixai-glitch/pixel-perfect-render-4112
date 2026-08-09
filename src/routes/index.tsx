@@ -7,6 +7,7 @@ import { Telemetry } from "@/components/veritas/Telemetry";
 import { Deployment } from "@/components/veritas/Deployment";
 import { CTA } from "@/components/veritas/CTA";
 import { Footer } from "@/components/veritas/Footer";
+import { WaitlistForm } from "@/components/veritas/WaitlistForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,6 +25,7 @@ export const Route = createFileRoute("/")({
           "Truth, proven cryptographically. Immutable proof, forensic replay, independent verification.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -39,9 +41,27 @@ function Index() {
         <Sovereignty />
         <Telemetry />
         <Deployment />
+        <section id="access" className="py-24 md:py-32 border-t border-border">
+          <div className="mx-auto max-w-[1400px] px-6">
+            <div className="grid gap-10 lg:grid-cols-2 items-start">
+              <div>
+                <p className="text-eyebrow mb-4">Restricted enrollment</p>
+                <h2 className="font-display text-3xl md:text-4xl tracking-tight">
+                  Request sovereign access
+                </h2>
+                <p className="mt-4 text-muted-foreground max-w-md">
+                  Veritas Core is deployed to regulated institutions on a rolling basis. Submit your
+                  organization details to join the early-access ledger.
+                </p>
+              </div>
+              <WaitlistForm />
+            </div>
+          </div>
+        </section>
         <CTA />
       </main>
       <Footer />
     </div>
   );
 }
+

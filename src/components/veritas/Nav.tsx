@@ -1,6 +1,17 @@
 import { Link } from "@tanstack/react-router";
+import { useAuth } from "@/lib/auth";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function Nav() {
+  const { user, signOut, isLoading } = useAuth();
+  const queryClient = useQueryClient();
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await signOut();
+  }
+
   return (
     <header className="fixed top-0 inset-x-0 z-50 hairline-b bg-background/70 backdrop-blur-md">
       <div className="mx-auto max-w-[1400px] px-6 h-14 flex items-center justify-between">
@@ -15,10 +26,10 @@ export function Nav() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-[12px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
-          <a href="#engine" className="hover:text-foreground transition-colors">Proof Engine</a>
-          <a href="#sovereignty" className="hover:text-foreground transition-colors">Sovereignty</a>
-          <a href="#telemetry" className="hover:text-foreground transition-colors">Telemetry</a>
-          <a href="#deployment" className="hover:text-foreground transition-colors">Deployment</a>
+          <a href="/#engine" className="hover:text-foreground transition-colors">Proof Engine</a>
+          <a href="/#sovereignty" className="hover:text-foreground transition-colors">Sovereignty</a>
+          <a href="/#telemetry" className="hover:text-foreground transition-colors">Telemetry</a>
+          <a href="/#deployment" className="hover:text-foreground transition-colors">Deployment</a>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -26,14 +37,45 @@ export function Nav() {
             <span className="w-1.5 h-1.5 rounded-full bg-verify pulse-dot" />
             Ledger online
           </span>
-          <a
-            href="#access"
-            className="text-[12px] font-mono uppercase tracking-[0.15em] border border-signal/60 text-signal px-3 py-1.5 hover:bg-signal hover:text-signal-foreground transition-colors"
-          >
-            Request Access
-          </a>
+
+          {!isLoading && (
+            <>
+              {user ? (
+                <>
+                  <Link
+                    to="/dashboard"
+                    className="text-[12px] font-mono uppercase tracking-[0.15em] border border-signal/60 text-signal px-3 py-1.5 hover:bg-signal hover:text-signal-foreground transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={handleSignOut}
+                    className="text-[12px] font-mono uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Sign out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <a
+                    href="/#access"
+                    className="text-[12px] font-mono uppercase tracking-[0.15em] border border-signal/60 text-signal px-3 py-1.5 hover:bg-signal hover:text-signal-foreground transition-colors"
+                  >
+                    Request Access
+                  </a>
+                  <Link
+                    to="/auth"
+                    className="text-[12px] font-mono uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Sign in
+                  </Link>
+                </>
+              )}
+            </>
+          )}
         </div>
       </div>
     </header>
   );
 }
+
