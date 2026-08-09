@@ -7,7 +7,7 @@ import { Telemetry } from "@/components/veritas/Telemetry";
 import { Deployment } from "@/components/veritas/Deployment";
 import { CTA } from "@/components/veritas/CTA";
 import { Footer } from "@/components/veritas/Footer";
-import { WaitlistForm } from "@/components/veritas/WaitlistForm";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
