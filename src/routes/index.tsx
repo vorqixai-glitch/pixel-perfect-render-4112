@@ -8,6 +8,7 @@ import { Deployment } from "@/components/veritas/Deployment";
 import { CTA } from "@/components/veritas/CTA";
 import { Footer } from "@/components/veritas/Footer";
 
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -24,6 +25,7 @@ export const Route = createFileRoute("/")({
           "Truth, proven cryptographically. Immutable proof, forensic replay, independent verification.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -45,3 +47,5 @@ function Index() {
     </div>
   );
 }
+
+

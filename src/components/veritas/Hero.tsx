@@ -1,3 +1,4 @@
+import { ClientOnly } from "@tanstack/react-router";
 import { ProofSphere } from "./ProofSphere";
 
 export function Hero() {
@@ -61,11 +62,14 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right — sphere */}
+        {/* Right — sphere (client-only to avoid SVG float hydration mismatch) */}
         <div className="relative">
-          <ProofSphere />
+          <ClientOnly fallback={<div className="aspect-square w-full max-w-[520px] mx-auto" />}>
+            <ProofSphere />
+          </ClientOnly>
         </div>
       </div>
     </section>
   );
 }
+
