@@ -61,7 +61,7 @@ export function AuthCard({ onSignedIn }: AuthCardProps) {
   return (
     <div className="panel panel-corner w-full max-w-md p-8">
       <div className="mb-8">
-        <p className="text-eyebrow mb-3">{mode === "signin" ? "Sign in" : "Request access"</p>
+        <p className="text-eyebrow mb-3">{mode === "signin" ? "Sign in" : "Request access"}</p>
         <h1 className="font-display text-2xl tracking-tight">
           {mode === "signin" ? "Enter the ledger" : "Join the waitlist"}
         </h1>
